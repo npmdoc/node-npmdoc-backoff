@@ -1,0 +1,22 @@
+<svg height="302" width="720" xmlns="http://www.w3.org/2000/svg">
+<rect height="302" fill="#555" width="720"></rect>
+<text fill="#7f7" font-family="Courier New" font-size="12" xml:space="preserve">
+<tspan x="10" y="26">  0.  2017-04-04 19:40:11 +0000    59309 byte  .</tspan>
+<tspan x="10" y="42">  1.  2017-04-04 19:40:11 +0000     2490 byte  CHANGES.md</tspan>
+<tspan x="10" y="58">  2.  2017-04-04 19:40:11 +0000     1060 byte  LICENSE</tspan>
+<tspan x="10" y="74">  3.  2017-04-04 19:40:11 +0000    11287 byte  README.md</tspan>
+<tspan x="10" y="90">  4.  2017-04-04 19:40:11 +0000     1158 byte  index.js</tspan>
+<tspan x="10" y="106">  5.  2017-04-04 19:40:11 +0000     2120 byte  lib/backoff.js</tspan>
+<tspan x="10" y="122">  6.  2017-04-04 19:40:11 +0000     6154 byte  lib/function_call.js</tspan>
+<tspan x="10" y="138">  7.  2017-04-04 19:40:11 +0000     1420 byte  lib/strategy/exponential.js</tspan>
+<tspan x="10" y="154">  8.  2017-04-04 19:40:11 +0000      855 byte  lib/strategy/fibonacci.js</tspan>
+<tspan x="10" y="170">  9.  2017-04-04 19:40:11 +0000     2776 byte  lib/strategy/strategy.js</tspan>
+<tspan x="10" y="186"> 10.  2017-04-04 19:40:11 +0000     2526 byte  package.json</tspan>
+<tspan x="10" y="202"> 11.  2017-04-04 19:40:11 +0000     2716 byte  tests/api.js</tspan>
+<tspan x="10" y="218"> 12.  2017-04-04 19:40:11 +0000     5051 byte  tests/backoff.js</tspan>
+<tspan x="10" y="234"> 13.  2017-04-04 19:40:11 +0000     2945 byte  tests/backoff_strategy.js</tspan>
+<tspan x="10" y="250"> 14.  2017-04-04 19:40:11 +0000     1868 byte  tests/exponential_backoff_strategy.js</tspan>
+<tspan x="10" y="266"> 15.  2017-04-04 19:40:11 +0000     1374 byte  tests/fibonacci_backoff_strategy.js</tspan>
+<tspan x="10" y="282"> 16.  2017-04-04 19:40:11 +0000    13509 byte  tests/function_call.js</tspan>
+</text>
+</svg>
