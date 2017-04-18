@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/MathieuTurcotte/node-backoff#readme"
-
-    >backoff (v2.5.0)</a>
+    <a href="https://github.com/MathieuTurcotte/node-backoff#readme">backoff (v2.5.0)</a>
 </h1>
 <h4>Fibonacci and exponential backoffs.</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.backoff">module backoff</a><ol>
 
@@ -1328,15 +1321,15 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">Backoff.prototype.backoff = function (err) {
-    precond.checkState(this.timeoutID_ === -1, &#x27;Backoff in progress.&#x27;);
+    precond.checkState(this.timeoutID_ === -1, 'Backoff in progress.');
 
     if (this.backoffNumber_ === this.maxNumberOfRetry_) {
-        this.emit(&#x27;fail&#x27;, err);
+        this.emit('fail', err);
         this.reset();
     } else {
         this.backoffDelay_ = this.backoffStrategy_.next();
         this.timeoutID_ = setTimeout(this.handlers.backoff, this.backoffDelay_);
-        this.emit(&#x27;backoff&#x27;, this.backoffNumber_, this.backoffDelay_, err);
+        this.emit('backoff', this.backoffNumber_, this.backoffDelay_, err);
     }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -1352,8 +1345,8 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">Backoff.prototype.failAfter = function (maxNumberOfRetry) {
-    precond.checkArgument(maxNumberOfRetry &#x3e; 0,
-        &#x27;Expected a maximum number of retry greater than 0 but got %s.&#x27;,
+    precond.checkArgument(maxNumberOfRetry &gt; 0,
+        'Expected a maximum number of retry greater than 0 but got %s.',
         maxNumberOfRetry);
 
     this.maxNumberOfRetry_ = maxNumberOfRetry;
@@ -1372,7 +1365,7 @@
     <ul>
     <li>description and source-code<pre class="apidocCodePre">Backoff.prototype.onBackoff_ = function () {
     this.timeoutID_ = -1;
-    this.emit(&#x27;ready&#x27;, this.backoffNumber_, this.backoffDelay_);
+    this.emit('ready', this.backoffNumber_, this.backoffDelay_);
     this.backoffNumber_++;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -1411,17 +1404,17 @@
     this.nextBackoffDelay_ = this.getInitialDelay();
     this.factor_ = ExponentialBackoffStrategy.DEFAULT_FACTOR;
 
-    if (options &#x26;&#x26; options.factor !== undefined) {
-        precond.checkArgument(options.factor &#x3e; 1,
-            &#x27;Exponential factor should be greater than 1 but got %s.&#x27;,
+    if (options &amp;&amp; options.factor !== undefined) {
+        precond.checkArgument(options.factor &gt; 1,
+            'Exponential factor should be greater than 1 but got %s.',
             options.factor);
         this.factor_ = options.factor;
     }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-        console.log(&#x27;Error: &#x27; + err.message);
+        console.log('Error: ' + err.message);
     } else {
-        console.log(&#x27;Status: &#x27; + res.statusCode);
+        console.log('Status: ' + res.statusCode);
     }
 });
 
@@ -1482,23 +1475,23 @@ call.start();
     <li>description and source-code<pre class="apidocCodePre">function BackoffStrategy(options) {
     options = options || {};
 
-    if (isDef(options.initialDelay) &#x26;&#x26; options.initialDelay &#x3c; 1) {
-        throw new Error(&#x27;The initial timeout must be greater than 0.&#x27;);
-    } else if (isDef(options.maxDelay) &#x26;&#x26; options.maxDelay &#x3c; 1) {
-        throw new Error(&#x27;The maximal timeout must be greater than 0.&#x27;);
+    if (isDef(options.initialDelay) &amp;&amp; options.initialDelay &lt; 1) {
+        throw new Error('The initial timeout must be greater than 0.');
+    } else if (isDef(options.maxDelay) &amp;&amp; options.maxDelay &lt; 1) {
+        throw new Error('The maximal timeout must be greater than 0.');
     }
 
     this.initialDelay_ = options.initialDelay || 100;
     this.maxDelay_ = options.maxDelay || 10000;
 
-    if (this.maxDelay_ &#x3c;= this.initialDelay_) {
-        throw new Error(&#x27;The maximal backoff delay must be &#x27; +
-                        &#x27;greater than the initial backoff delay.&#x27;);
+    if (this.maxDelay_ &lt;= this.initialDelay_) {
+        throw new Error('The maximal backoff delay must be ' +
+                        'greater than the initial backoff delay.');
     }
 
-    if (isDef(options.randomisationFactor) &#x26;&#x26;
-        (options.randomisationFactor &#x3c; 0 || options.randomisationFactor &#x3e; 1)) {
-        throw new Error(&#x27;The randomisation factor must be between 0 and 1.&#x27;);
+    if (isDef(options.randomisationFactor) &amp;&amp;
+        (options.randomisationFactor &lt; 0 || options.randomisationFactor &gt; 1)) {
+        throw new Error('The randomisation factor must be between 0 and 1.');
     }
 
     this.randomisationFactor_ = options.randomisationFactor || 0;
@@ -1564,7 +1557,7 @@ call.start();
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">ExponentialStrategy.super_.prototype.next_ = function () {
-    throw new Error(&#x27;BackoffStrategy.next_() unimplemented.&#x27;);
+    throw new Error('BackoffStrategy.next_() unimplemented.');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -1594,7 +1587,7 @@ call.start();
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">ExponentialStrategy.super_.prototype.reset_ = function () {
-    throw new Error(&#x27;BackoffStrategy.reset_() unimplemented.&#x27;);
+    throw new Error('BackoffStrategy.reset_() unimplemented.');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -1662,9 +1655,9 @@ call.start();
     <li>description and source-code<pre class="apidocCodePre">function FunctionCall(fn, args, callback) {
     events.EventEmitter.call(this);
 
-    precond.checkIsFunction(fn, &#x27;Expected fn to be a function.&#x27;);
-    precond.checkIsArray(args, &#x27;Expected args to be an array.&#x27;);
-    precond.checkIsFunction(callback, &#x27;Expected callback to be a function.&#x27;);
+    precond.checkIsFunction(fn, 'Expected fn to be a function.');
+    precond.checkIsArray(args, 'Expected args to be an array.');
+    precond.checkIsFunction(callback, 'Expected callback to be a function.');
 
     this.function_ = fn;
     this.arguments_ = args;
@@ -1716,8 +1709,8 @@ call.start();
     }
 
     this.state_ = FunctionCall.State_.ABORTED;
-    this.lastResult_ = [new Error(&#x27;Backoff aborted.&#x27;)];
-    this.emit(&#x27;abort&#x27;);
+    this.lastResult_ = [new Error('Backoff aborted.')];
+    this.emit('abort');
     this.doCallback_();
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -1736,7 +1729,7 @@ call.start();
     if (isRetry) {
         this.numRetries_++;
     }
-    var eventArgs = [&#x27;call&#x27;].concat(this.arguments_);
+    var eventArgs = ['call'].concat(this.arguments_);
     events.EventEmitter.prototype.emit.apply(this, eventArgs);
     var callback = this.handleFunctionCallback_.bind(this);
     this.function_.apply(null, this.arguments_.concat(callback));
@@ -1769,7 +1762,7 @@ call.start();
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">FunctionCall.prototype.failAfter = function (maxNumberOfRetry) {
-    precond.checkState(this.isPending(), &#x27;FunctionCall in progress.&#x27;);
+    precond.checkState(this.isPending(), 'FunctionCall in progress.');
     this.failAfter_ = maxNumberOfRetry;
     return this; // Return this for chaining.
 }</pre></li>
@@ -1816,7 +1809,7 @@ call.start();
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">FunctionCall.prototype.handleBackoff_ = function (number, delay, err) {
-    this.emit(&#x27;backoff&#x27;, number, delay, err);
+    this.emit('backoff', number, delay, err);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -1837,10 +1830,10 @@ call.start();
 
     var args = Array.prototype.slice.call(arguments);
     this.lastResult_ = args; // Save last callback arguments.
-    events.EventEmitter.prototype.emit.apply(this, [&#x27;callback&#x27;].concat(args));
+    events.EventEmitter.prototype.emit.apply(this, ['callback'].concat(args));
 
     var err = args[0];
-    if (err &#x26;&#x26; this.retryPredicate_(err)) {
+    if (err &amp;&amp; this.retryPredicate_(err)) {
         this.backoff_.backoff(err);
     } else {
         this.state_ = FunctionCall.State_.COMPLETED;
@@ -1920,7 +1913,7 @@ call.start();
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">FunctionCall.prototype.retryIf = function (retryPredicate) {
-    precond.checkState(this.isPending(), &#x27;FunctionCall in progress.&#x27;);
+    precond.checkState(this.isPending(), 'FunctionCall in progress.');
     this.retryPredicate_ = retryPredicate;
     return this;
 }</pre></li>
@@ -1937,7 +1930,7 @@ call.start();
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">FunctionCall.prototype.setStrategy = function (strategy) {
-    precond.checkState(this.isPending(), &#x27;FunctionCall in progress.&#x27;);
+    precond.checkState(this.isPending(), 'FunctionCall in progress.');
     this.strategy_ = strategy;
     return this; // Return this for chaining.
 }</pre></li>
@@ -1954,8 +1947,8 @@ call.start();
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">FunctionCall.prototype.start = function (backoffFactory) {
-    precond.checkState(!this.isAborted(), &#x27;FunctionCall is aborted.&#x27;);
-    precond.checkState(this.isPending(), &#x27;FunctionCall already started.&#x27;);
+    precond.checkState(!this.isAborted(), 'FunctionCall is aborted.');
+    precond.checkState(this.isPending(), 'FunctionCall already started.');
 
     var strategy = this.strategy_ || new FibonacciBackoffStrategy();
 
@@ -1963,11 +1956,11 @@ call.start();
         backoffFactory(strategy) :
         new Backoff(strategy);
 
-    this.backoff_.on(&#x27;ready&#x27;, this.doCall_.bind(this, true /* isRetry */));
-    this.backoff_.on(&#x27;fail&#x27;, this.doCallback_.bind(this));
-    this.backoff_.on(&#x27;backoff&#x27;, this.handleBackoff_.bind(this));
+    this.backoff_.on('ready', this.doCall_.bind(this, true /* isRetry */));
+    this.backoff_.on('fail', this.doCallback_.bind(this));
+    this.backoff_.on('backoff', this.handleBackoff_.bind(this));
 
-    if (this.failAfter_ &#x3e; 0) {
+    if (this.failAfter_ &gt; 0) {
         this.backoff_.failAfter(this.failAfter_);
     }
 
@@ -1996,18 +1989,18 @@ call.start();
     <li>example usage<pre class="apidocCodePre">...
 
 Note that `Backoff` objects are meant to be instantiated once and reused
-several times by calling `reset` after a successful &#x22;retry&#x22;.
+several times by calling `reset` after a successful "retry".
 
 ### Functional
 
-It&#x27;s also possible to avoid some boilerplate code when invoking an asynchronous
+It's also possible to avoid some boilerplate code when invoking an asynchronous
 function in a backoff loop by using `backoff.<span class="apidocCodeKeywordSpan">call</span>(fn, [args, ...], callback)`.
 
 Typical usage looks like the following.
 
 ``` js
-var call = backoff.call(get, &#x27;https://duplika.ca/&#x27;, function(err, res) {
-console.log(&#x27;Num retries: &#x27; + call.getNumRetries());
+var call = backoff.call(get, 'https://duplika.ca/', function(err, res) {
+console.log('Num retries: ' + call.getNumRetries());
 ...</pre></li>
     </ul>
 
@@ -2156,21 +2149,21 @@ delay.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">backoff = function (err) {
-    precond.checkState(this.timeoutID_ === -1, &#x27;Backoff in progress.&#x27;);
+    precond.checkState(this.timeoutID_ === -1, 'Backoff in progress.');
 
     if (this.backoffNumber_ === this.maxNumberOfRetry_) {
-        this.emit(&#x27;fail&#x27;, err);
+        this.emit('fail', err);
         this.reset();
     } else {
         this.backoffDelay_ = this.backoffStrategy_.next();
         this.timeoutID_ = setTimeout(this.handlers.backoff, this.backoffDelay_);
-        this.emit(&#x27;backoff&#x27;, this.backoffNumber_, this.backoffDelay_, err);
+        this.emit('backoff', this.backoffNumber_, this.backoffDelay_, err);
     }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 });
 
-fibonacciBackoff.on(&#x27;ready&#x27;, function(number, delay) {
+fibonacciBackoff.on('ready', function(number, delay) {
     // Do something when backoff ends, e.g. retry a failed
     // operation (DNS lookup, API call, etc.). If it fails
     // again then backoff, otherwise reset the backoff
@@ -2178,10 +2171,10 @@ fibonacciBackoff.on(&#x27;ready&#x27;, function(number, delay) {
     fibonacciBackoff.<span class="apidocCodeKeywordSpan">backoff</span>();
 });
 
-fibonacciBackoff.on(&#x27;fail&#x27;, function() {
+fibonacciBackoff.on('fail', function() {
     // Do something when the maximum number of backoffs is
     // reached, e.g. ask the user to check its connection.
-    console.log(&#x27;fail&#x27;);
+    console.log('fail');
 });
 ...</pre></li>
     </ul>
@@ -2196,8 +2189,8 @@ fibonacciBackoff.on(&#x27;fail&#x27;, function() {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">failAfter = function (maxNumberOfRetry) {
-    precond.checkArgument(maxNumberOfRetry &#x3e; 0,
-        &#x27;Expected a maximum number of retry greater than 0 but got %s.&#x27;,
+    precond.checkArgument(maxNumberOfRetry &gt; 0,
+        'Expected a maximum number of retry greater than 0 but got %s.',
         maxNumberOfRetry);
 
     this.maxNumberOfRetry_ = maxNumberOfRetry;
@@ -2212,10 +2205,10 @@ var fibonacciBackoff = backoff.fibonacci({
 
 fibonacciBackoff.<span class="apidocCodeKeywordSpan">failAfter</span>(10);
 
-fibonacciBackoff.on(&#x27;backoff&#x27;, function(number, delay) {
+fibonacciBackoff.on('backoff', function(number, delay) {
     // Do something when backoff starts, e.g. show to the
     // user the delay before next reconnection attempt.
-    console.log(number + &#x27; &#x27; + delay + &#x27;ms&#x27;);
+    console.log(number + ' ' + delay + 'ms');
 });
 ...</pre></li>
     </ul>
@@ -2231,7 +2224,7 @@ fibonacciBackoff.on(&#x27;backoff&#x27;, function(number, delay) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">onBackoff_ = function () {
     this.timeoutID_ = -1;
-    this.emit(&#x27;ready&#x27;, this.backoffNumber_, this.backoffDelay_);
+    this.emit('ready', this.backoffNumber_, this.backoffDelay_);
     this.backoffNumber_++;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -2286,21 +2279,21 @@ the sensitive operation guarded by the backoff instance or if the client code
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">backoff = function (err) {
-    precond.checkState(this.timeoutID_ === -1, &#x27;Backoff in progress.&#x27;);
+    precond.checkState(this.timeoutID_ === -1, 'Backoff in progress.');
 
     if (this.backoffNumber_ === this.maxNumberOfRetry_) {
-        this.emit(&#x27;fail&#x27;, err);
+        this.emit('fail', err);
         this.reset();
     } else {
         this.backoffDelay_ = this.backoffStrategy_.next();
         this.timeoutID_ = setTimeout(this.handlers.backoff, this.backoffDelay_);
-        this.emit(&#x27;backoff&#x27;, this.backoffNumber_, this.backoffDelay_, err);
+        this.emit('backoff', this.backoffNumber_, this.backoffDelay_, err);
     }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 });
 
-fibonacciBackoff.on(&#x27;ready&#x27;, function(number, delay) {
+fibonacciBackoff.on('ready', function(number, delay) {
     // Do something when backoff ends, e.g. retry a failed
     // operation (DNS lookup, API call, etc.). If it fails
     // again then backoff, otherwise reset the backoff
@@ -2308,10 +2301,10 @@ fibonacciBackoff.on(&#x27;ready&#x27;, function(number, delay) {
     fibonacciBackoff.<span class="apidocCodeKeywordSpan">backoff</span>();
 });
 
-fibonacciBackoff.on(&#x27;fail&#x27;, function() {
+fibonacciBackoff.on('fail', function() {
     // Do something when the maximum number of backoffs is
     // reached, e.g. ask the user to check its connection.
-    console.log(&#x27;fail&#x27;);
+    console.log('fail');
 });
 ...</pre></li>
     </ul>
@@ -2331,8 +2324,8 @@ fibonacciBackoff.on(&#x27;fail&#x27;, function() {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">failAfter = function (maxNumberOfRetry) {
-    precond.checkArgument(maxNumberOfRetry &#x3e; 0,
-        &#x27;Expected a maximum number of retry greater than 0 but got %s.&#x27;,
+    precond.checkArgument(maxNumberOfRetry &gt; 0,
+        'Expected a maximum number of retry greater than 0 but got %s.',
         maxNumberOfRetry);
 
     this.maxNumberOfRetry_ = maxNumberOfRetry;
@@ -2347,10 +2340,10 @@ var fibonacciBackoff = backoff.fibonacci({
 
 fibonacciBackoff.<span class="apidocCodeKeywordSpan">failAfter</span>(10);
 
-fibonacciBackoff.on(&#x27;backoff&#x27;, function(number, delay) {
+fibonacciBackoff.on('backoff', function(number, delay) {
     // Do something when backoff starts, e.g. show to the
     // user the delay before next reconnection attempt.
-    console.log(number + &#x27; &#x27; + delay + &#x27;ms&#x27;);
+    console.log(number + ' ' + delay + 'ms');
 });
 ...</pre></li>
     </ul>
@@ -2371,7 +2364,7 @@ fibonacciBackoff.on(&#x27;backoff&#x27;, function(number, delay) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">onBackoff_ = function () {
     this.timeoutID_ = -1;
-    this.emit(&#x27;ready&#x27;, this.backoffNumber_, this.backoffDelay_);
+    this.emit('ready', this.backoffNumber_, this.backoffDelay_);
     this.backoffNumber_++;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -2436,17 +2429,17 @@ the sensitive operation guarded by the backoff instance or if the client code
     this.nextBackoffDelay_ = this.getInitialDelay();
     this.factor_ = ExponentialBackoffStrategy.DEFAULT_FACTOR;
 
-    if (options &#x26;&#x26; options.factor !== undefined) {
-        precond.checkArgument(options.factor &#x3e; 1,
-            &#x27;Exponential factor should be greater than 1 but got %s.&#x27;,
+    if (options &amp;&amp; options.factor !== undefined) {
+        precond.checkArgument(options.factor &gt; 1,
+            'Exponential factor should be greater than 1 but got %s.',
             options.factor);
         this.factor_ = options.factor;
     }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-        console.log(&#x27;Error: &#x27; + err.message);
+        console.log('Error: ' + err.message);
     } else {
-        console.log(&#x27;Status: &#x27; + res.statusCode);
+        console.log('Status: ' + res.statusCode);
     }
 });
 
@@ -2474,23 +2467,23 @@ call.start();
     <li>description and source-code<pre class="apidocCodePre">function BackoffStrategy(options) {
     options = options || {};
 
-    if (isDef(options.initialDelay) &#x26;&#x26; options.initialDelay &#x3c; 1) {
-        throw new Error(&#x27;The initial timeout must be greater than 0.&#x27;);
-    } else if (isDef(options.maxDelay) &#x26;&#x26; options.maxDelay &#x3c; 1) {
-        throw new Error(&#x27;The maximal timeout must be greater than 0.&#x27;);
+    if (isDef(options.initialDelay) &amp;&amp; options.initialDelay &lt; 1) {
+        throw new Error('The initial timeout must be greater than 0.');
+    } else if (isDef(options.maxDelay) &amp;&amp; options.maxDelay &lt; 1) {
+        throw new Error('The maximal timeout must be greater than 0.');
     }
 
     this.initialDelay_ = options.initialDelay || 100;
     this.maxDelay_ = options.maxDelay || 10000;
 
-    if (this.maxDelay_ &#x3c;= this.initialDelay_) {
-        throw new Error(&#x27;The maximal backoff delay must be &#x27; +
-                        &#x27;greater than the initial backoff delay.&#x27;);
+    if (this.maxDelay_ &lt;= this.initialDelay_) {
+        throw new Error('The maximal backoff delay must be ' +
+                        'greater than the initial backoff delay.');
     }
 
-    if (isDef(options.randomisationFactor) &#x26;&#x26;
-        (options.randomisationFactor &#x3c; 0 || options.randomisationFactor &#x3e; 1)) {
-        throw new Error(&#x27;The randomisation factor must be between 0 and 1.&#x27;);
+    if (isDef(options.randomisationFactor) &amp;&amp;
+        (options.randomisationFactor &lt; 0 || options.randomisationFactor &gt; 1)) {
+        throw new Error('The randomisation factor must be between 0 and 1.');
     }
 
     this.randomisationFactor_ = options.randomisationFactor || 0;
@@ -2598,23 +2591,23 @@ call.start();
     <li>description and source-code<pre class="apidocCodePre">function BackoffStrategy(options) {
     options = options || {};
 
-    if (isDef(options.initialDelay) &#x26;&#x26; options.initialDelay &#x3c; 1) {
-        throw new Error(&#x27;The initial timeout must be greater than 0.&#x27;);
-    } else if (isDef(options.maxDelay) &#x26;&#x26; options.maxDelay &#x3c; 1) {
-        throw new Error(&#x27;The maximal timeout must be greater than 0.&#x27;);
+    if (isDef(options.initialDelay) &amp;&amp; options.initialDelay &lt; 1) {
+        throw new Error('The initial timeout must be greater than 0.');
+    } else if (isDef(options.maxDelay) &amp;&amp; options.maxDelay &lt; 1) {
+        throw new Error('The maximal timeout must be greater than 0.');
     }
 
     this.initialDelay_ = options.initialDelay || 100;
     this.maxDelay_ = options.maxDelay || 10000;
 
-    if (this.maxDelay_ &#x3c;= this.initialDelay_) {
-        throw new Error(&#x27;The maximal backoff delay must be &#x27; +
-                        &#x27;greater than the initial backoff delay.&#x27;);
+    if (this.maxDelay_ &lt;= this.initialDelay_) {
+        throw new Error('The maximal backoff delay must be ' +
+                        'greater than the initial backoff delay.');
     }
 
-    if (isDef(options.randomisationFactor) &#x26;&#x26;
-        (options.randomisationFactor &#x3c; 0 || options.randomisationFactor &#x3e; 1)) {
-        throw new Error(&#x27;The randomisation factor must be between 0 and 1.&#x27;);
+    if (isDef(options.randomisationFactor) &amp;&amp;
+        (options.randomisationFactor &lt; 0 || options.randomisationFactor &gt; 1)) {
+        throw new Error('The randomisation factor must be between 0 and 1.');
     }
 
     this.randomisationFactor_ = options.randomisationFactor || 0;
@@ -2700,7 +2693,7 @@ Resets the backoff delay to its initial value.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">next_ = function () {
-    throw new Error(&#x27;BackoffStrategy.next_() unimplemented.&#x27;);
+    throw new Error('BackoffStrategy.next_() unimplemented.');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -2746,7 +2739,7 @@ the sensitive operation guarded by the backoff instance or if the client code
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">reset_ = function () {
-    throw new Error(&#x27;BackoffStrategy.reset_() unimplemented.&#x27;);
+    throw new Error('BackoffStrategy.reset_() unimplemented.');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -2844,7 +2837,7 @@ Resets the backoff delay to its initial value.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">next_ = function () {
-    throw new Error(&#x27;BackoffStrategy.next_() unimplemented.&#x27;);
+    throw new Error('BackoffStrategy.next_() unimplemented.');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -2900,7 +2893,7 @@ the sensitive operation guarded by the backoff instance or if the client code
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">reset_ = function () {
-    throw new Error(&#x27;BackoffStrategy.reset_() unimplemented.&#x27;);
+    throw new Error('BackoffStrategy.reset_() unimplemented.');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -2939,23 +2932,23 @@ the sensitive operation guarded by the backoff instance or if the client code
     <li>description and source-code<pre class="apidocCodePre">function BackoffStrategy(options) {
     options = options || {};
 
-    if (isDef(options.initialDelay) &#x26;&#x26; options.initialDelay &#x3c; 1) {
-        throw new Error(&#x27;The initial timeout must be greater than 0.&#x27;);
-    } else if (isDef(options.maxDelay) &#x26;&#x26; options.maxDelay &#x3c; 1) {
-        throw new Error(&#x27;The maximal timeout must be greater than 0.&#x27;);
+    if (isDef(options.initialDelay) &amp;&amp; options.initialDelay &lt; 1) {
+        throw new Error('The initial timeout must be greater than 0.');
+    } else if (isDef(options.maxDelay) &amp;&amp; options.maxDelay &lt; 1) {
+        throw new Error('The maximal timeout must be greater than 0.');
     }
 
     this.initialDelay_ = options.initialDelay || 100;
     this.maxDelay_ = options.maxDelay || 10000;
 
-    if (this.maxDelay_ &#x3c;= this.initialDelay_) {
-        throw new Error(&#x27;The maximal backoff delay must be &#x27; +
-                        &#x27;greater than the initial backoff delay.&#x27;);
+    if (this.maxDelay_ &lt;= this.initialDelay_) {
+        throw new Error('The maximal backoff delay must be ' +
+                        'greater than the initial backoff delay.');
     }
 
-    if (isDef(options.randomisationFactor) &#x26;&#x26;
-        (options.randomisationFactor &#x3c; 0 || options.randomisationFactor &#x3e; 1)) {
-        throw new Error(&#x27;The randomisation factor must be between 0 and 1.&#x27;);
+    if (isDef(options.randomisationFactor) &amp;&amp;
+        (options.randomisationFactor &lt; 0 || options.randomisationFactor &gt; 1)) {
+        throw new Error('The randomisation factor must be between 0 and 1.');
     }
 
     this.randomisationFactor_ = options.randomisationFactor || 0;
@@ -3063,9 +3056,9 @@ the sensitive operation guarded by the backoff instance or if the client code
     <li>description and source-code<pre class="apidocCodePre">function FunctionCall(fn, args, callback) {
     events.EventEmitter.call(this);
 
-    precond.checkIsFunction(fn, &#x27;Expected fn to be a function.&#x27;);
-    precond.checkIsArray(args, &#x27;Expected args to be an array.&#x27;);
-    precond.checkIsFunction(callback, &#x27;Expected callback to be a function.&#x27;);
+    precond.checkIsFunction(fn, 'Expected fn to be a function.');
+    precond.checkIsArray(args, 'Expected args to be an array.');
+    precond.checkIsFunction(callback, 'Expected callback to be a function.');
 
     this.function_ = fn;
     this.arguments_ = args;
@@ -3159,8 +3152,8 @@ the sensitive operation guarded by the backoff instance or if the client code
     }
 
     this.state_ = FunctionCall.State_.ABORTED;
-    this.lastResult_ = [new Error(&#x27;Backoff aborted.&#x27;)];
-    this.emit(&#x27;abort&#x27;);
+    this.lastResult_ = [new Error('Backoff aborted.')];
+    this.emit('abort');
     this.doCallback_();
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
@@ -3177,7 +3170,7 @@ Aborts the call and causes the completion callback to be invoked with an abort
 error if the call was pending or running; does nothing otherwise. This method
 can safely be called mutliple times.
 
-#### Event: &#x27;call&#x27;
+#### Event: 'call'
 ...</pre></li>
     </ul>
 
@@ -3194,7 +3187,7 @@ can safely be called mutliple times.
     if (isRetry) {
         this.numRetries_++;
     }
-    var eventArgs = [&#x27;call&#x27;].concat(this.arguments_);
+    var eventArgs = ['call'].concat(this.arguments_);
     events.EventEmitter.prototype.emit.apply(this, eventArgs);
     var callback = this.handleFunctionCallback_.bind(this);
     this.function_.apply(null, this.arguments_.concat(callback));
@@ -3227,7 +3220,7 @@ can safely be called mutliple times.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">failAfter = function (maxNumberOfRetry) {
-    precond.checkState(this.isPending(), &#x27;FunctionCall in progress.&#x27;);
+    precond.checkState(this.isPending(), 'FunctionCall in progress.');
     this.failAfter_ = maxNumberOfRetry;
     return this; // Return this for chaining.
 }</pre></li>
@@ -3241,10 +3234,10 @@ var fibonacciBackoff = backoff.fibonacci({
 
 fibonacciBackoff.<span class="apidocCodeKeywordSpan">failAfter</span>(10);
 
-fibonacciBackoff.on(&#x27;backoff&#x27;, function(number, delay) {
+fibonacciBackoff.on('backoff', function(number, delay) {
     // Do something when backoff starts, e.g. show to the
     // user the delay before next reconnection attempt.
-    console.log(number + &#x27; &#x27; + delay + &#x27;ms&#x27;);
+    console.log(number + ' ' + delay + 'ms');
 });
 ...</pre></li>
     </ul>
@@ -3293,19 +3286,19 @@ var results = call.getLastResult();
     return this.numRetries_;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-It&#x27;s also possible to avoid some boilerplate code when invoking an asynchronous
+It's also possible to avoid some boilerplate code when invoking an asynchronous
 function in a backoff loop by using `backoff.call(fn, [args, ...], callback)`.
 
 Typical usage looks like the following.
 
 ``` js
-var call = backoff.call(get, &#x27;https://duplika.ca/&#x27;, function(err, res) {
-    console.log(&#x27;Num retries: &#x27; + call.<span class="apidocCodeKeywordSpan">getNumRetries</span>());
+var call = backoff.call(get, 'https://duplika.ca/', function(err, res) {
+    console.log('Num retries: ' + call.<span class="apidocCodeKeywordSpan">getNumRetries</span>());
 
     if (err) {
-        console.log(&#x27;Error: &#x27; + err.message);
+        console.log('Error: ' + err.message);
     } else {
-        console.log(&#x27;Status: &#x27; + res.statusCode);
+        console.log('Status: ' + res.statusCode);
     }
 });
 ...</pre></li>
@@ -3321,7 +3314,7 @@ var call = backoff.call(get, &#x27;https://duplika.ca/&#x27;, function(err, res)
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">handleBackoff_ = function (number, delay, err) {
-    this.emit(&#x27;backoff&#x27;, number, delay, err);
+    this.emit('backoff', number, delay, err);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3342,10 +3335,10 @@ var call = backoff.call(get, &#x27;https://duplika.ca/&#x27;, function(err, res)
 
     var args = Array.prototype.slice.call(arguments);
     this.lastResult_ = args; // Save last callback arguments.
-    events.EventEmitter.prototype.emit.apply(this, [&#x27;callback&#x27;].concat(args));
+    events.EventEmitter.prototype.emit.apply(this, ['callback'].concat(args));
 
     var err = args[0];
-    if (err &#x26;&#x26; this.retryPredicate_(err)) {
+    if (err &amp;&amp; this.retryPredicate_(err)) {
         this.backoff_.backoff(err);
     } else {
         this.state_ = FunctionCall.State_.COMPLETED;
@@ -3399,7 +3392,7 @@ Returns whether the call is aborted.
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-Returns whether the call is pending, i.e. hasn&#x27;t been started.
+Returns whether the call is pending, i.e. hasn't been started.
 
 #### call.isRunning()
 
@@ -3430,14 +3423,14 @@ Returns whether the call is aborted.
     <li>example usage<pre class="apidocCodePre">...
 
 - fn: asynchronous function to call
-- args: an array containing fn&#x27;s args
-- callback: fn&#x27;s callback
+- args: an array containing fn's args
+- callback: fn's callback
 
 Constructs a function handler for the given asynchronous function.
 
 #### call.<span class="apidocCodeKeywordSpan">isPending</span>()
 
-Returns whether the call is pending, i.e. hasn&#x27;t been started.
+Returns whether the call is pending, i.e. hasn't been started.
 
 #### call.isRunning()
 
@@ -3463,7 +3456,7 @@ Constructs a function handler for the given asynchronous function.
 
 #### call.isPending()
 
-Returns whether the call is pending, i.e. hasn&#x27;t been started.
+Returns whether the call is pending, i.e. hasn't been started.
 
 #### call.<span class="apidocCodeKeywordSpan">isRunning</span>()
 
@@ -3485,15 +3478,15 @@ Returns whether the call is completed.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">retryIf = function (retryPredicate) {
-    precond.checkState(this.isPending(), &#x27;FunctionCall in progress.&#x27;);
+    precond.checkState(this.isPending(), 'FunctionCall in progress.');
     this.retryPredicate_ = retryPredicate;
     return this;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
     if (err) {
-        console.log(&#x27;Error: &#x27; + err.message);
+        console.log('Error: ' + err.message);
     } else {
-        console.log(&#x27;Status: &#x27; + res.statusCode);
+        console.log('Status: ' + res.statusCode);
     }
 });
 
@@ -3517,14 +3510,14 @@ call.start();
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">setStrategy = function (strategy) {
-    precond.checkState(this.isPending(), &#x27;FunctionCall in progress.&#x27;);
+    precond.checkState(this.isPending(), 'FunctionCall in progress.');
     this.strategy_ = strategy;
     return this; // Return this for chaining.
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-        console.log(&#x27;Error: &#x27; + err.message);
+        console.log('Error: ' + err.message);
     } else {
-        console.log(&#x27;Status: &#x27; + res.statusCode);
+        console.log('Status: ' + res.statusCode);
     }
 });
 
@@ -3550,8 +3543,8 @@ call.start();
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">start = function (backoffFactory) {
-    precond.checkState(!this.isAborted(), &#x27;FunctionCall is aborted.&#x27;);
-    precond.checkState(this.isPending(), &#x27;FunctionCall already started.&#x27;);
+    precond.checkState(!this.isAborted(), 'FunctionCall is aborted.');
+    precond.checkState(this.isPending(), 'FunctionCall already started.');
 
     var strategy = this.strategy_ || new FibonacciBackoffStrategy();
 
@@ -3559,11 +3552,11 @@ call.start();
         backoffFactory(strategy) :
         new Backoff(strategy);
 
-    this.backoff_.on(&#x27;ready&#x27;, this.doCall_.bind(this, true /* isRetry */));
-    this.backoff_.on(&#x27;fail&#x27;, this.doCallback_.bind(this));
-    this.backoff_.on(&#x27;backoff&#x27;, this.handleBackoff_.bind(this));
+    this.backoff_.on('ready', this.doCall_.bind(this, true /* isRetry */));
+    this.backoff_.on('fail', this.doCallback_.bind(this));
+    this.backoff_.on('backoff', this.handleBackoff_.bind(this));
 
-    if (this.failAfter_ &#x3e; 0) {
+    if (this.failAfter_ &gt; 0) {
         this.backoff_.failAfter(this.failAfter_);
     }
 
@@ -3571,7 +3564,7 @@ call.start();
     this.doCall_(false /* isRetry */);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-        console.log(&#x27;Status: &#x27; + res.statusCode);
+        console.log('Status: ' + res.statusCode);
     }
 });
 
@@ -3613,8 +3606,8 @@ Constructs a Fibonacci backoff (10, 10, 20, 30, 50, etc.).
     }
 
     this.state_ = FunctionCall.State_.ABORTED;
-    this.lastResult_ = [new Error(&#x27;Backoff aborted.&#x27;)];
-    this.emit(&#x27;abort&#x27;);
+    this.lastResult_ = [new Error('Backoff aborted.')];
+    this.emit('abort');
     this.doCallback_();
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
@@ -3631,7 +3624,7 @@ Aborts the call and causes the completion callback to be invoked with an abort
 error if the call was pending or running; does nothing otherwise. This method
 can safely be called mutliple times.
 
-#### Event: &#x27;call&#x27;
+#### Event: 'call'
 ...</pre></li>
     </ul>
 
@@ -3653,7 +3646,7 @@ can safely be called mutliple times.
     if (isRetry) {
         this.numRetries_++;
     }
-    var eventArgs = [&#x27;call&#x27;].concat(this.arguments_);
+    var eventArgs = ['call'].concat(this.arguments_);
     events.EventEmitter.prototype.emit.apply(this, eventArgs);
     var callback = this.handleFunctionCallback_.bind(this);
     this.function_.apply(null, this.arguments_.concat(callback));
@@ -3696,7 +3689,7 @@ can safely be called mutliple times.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">failAfter = function (maxNumberOfRetry) {
-    precond.checkState(this.isPending(), &#x27;FunctionCall in progress.&#x27;);
+    precond.checkState(this.isPending(), 'FunctionCall in progress.');
     this.failAfter_ = maxNumberOfRetry;
     return this; // Return this for chaining.
 }</pre></li>
@@ -3710,10 +3703,10 @@ var fibonacciBackoff = backoff.fibonacci({
 
 fibonacciBackoff.<span class="apidocCodeKeywordSpan">failAfter</span>(10);
 
-fibonacciBackoff.on(&#x27;backoff&#x27;, function(number, delay) {
+fibonacciBackoff.on('backoff', function(number, delay) {
     // Do something when backoff starts, e.g. show to the
     // user the delay before next reconnection attempt.
-    console.log(number + &#x27; &#x27; + delay + &#x27;ms&#x27;);
+    console.log(number + ' ' + delay + 'ms');
 });
 ...</pre></li>
     </ul>
@@ -3772,19 +3765,19 @@ var results = call.getLastResult();
     return this.numRetries_;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-It&#x27;s also possible to avoid some boilerplate code when invoking an asynchronous
+It's also possible to avoid some boilerplate code when invoking an asynchronous
 function in a backoff loop by using `backoff.call(fn, [args, ...], callback)`.
 
 Typical usage looks like the following.
 
 ``` js
-var call = backoff.call(get, &#x27;https://duplika.ca/&#x27;, function(err, res) {
-    console.log(&#x27;Num retries: &#x27; + call.<span class="apidocCodeKeywordSpan">getNumRetries</span>());
+var call = backoff.call(get, 'https://duplika.ca/', function(err, res) {
+    console.log('Num retries: ' + call.<span class="apidocCodeKeywordSpan">getNumRetries</span>());
 
     if (err) {
-        console.log(&#x27;Error: &#x27; + err.message);
+        console.log('Error: ' + err.message);
     } else {
-        console.log(&#x27;Status: &#x27; + res.statusCode);
+        console.log('Status: ' + res.statusCode);
     }
 });
 ...</pre></li>
@@ -3805,7 +3798,7 @@ var call = backoff.call(get, &#x27;https://duplika.ca/&#x27;, function(err, res)
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">handleBackoff_ = function (number, delay, err) {
-    this.emit(&#x27;backoff&#x27;, number, delay, err);
+    this.emit('backoff', number, delay, err);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3831,10 +3824,10 @@ var call = backoff.call(get, &#x27;https://duplika.ca/&#x27;, function(err, res)
 
     var args = Array.prototype.slice.call(arguments);
     this.lastResult_ = args; // Save last callback arguments.
-    events.EventEmitter.prototype.emit.apply(this, [&#x27;callback&#x27;].concat(args));
+    events.EventEmitter.prototype.emit.apply(this, ['callback'].concat(args));
 
     var err = args[0];
-    if (err &#x26;&#x26; this.retryPredicate_(err)) {
+    if (err &amp;&amp; this.retryPredicate_(err)) {
         this.backoff_.backoff(err);
     } else {
         this.state_ = FunctionCall.State_.COMPLETED;
@@ -3898,7 +3891,7 @@ Returns whether the call is aborted.
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-Returns whether the call is pending, i.e. hasn&#x27;t been started.
+Returns whether the call is pending, i.e. hasn't been started.
 
 #### call.isRunning()
 
@@ -3934,14 +3927,14 @@ Returns whether the call is aborted.
     <li>example usage<pre class="apidocCodePre">...
 
 - fn: asynchronous function to call
-- args: an array containing fn&#x27;s args
-- callback: fn&#x27;s callback
+- args: an array containing fn's args
+- callback: fn's callback
 
 Constructs a function handler for the given asynchronous function.
 
 #### call.<span class="apidocCodeKeywordSpan">isPending</span>()
 
-Returns whether the call is pending, i.e. hasn&#x27;t been started.
+Returns whether the call is pending, i.e. hasn't been started.
 
 #### call.isRunning()
 
@@ -3972,7 +3965,7 @@ Constructs a function handler for the given asynchronous function.
 
 #### call.isPending()
 
-Returns whether the call is pending, i.e. hasn&#x27;t been started.
+Returns whether the call is pending, i.e. hasn't been started.
 
 #### call.<span class="apidocCodeKeywordSpan">isRunning</span>()
 
@@ -3999,15 +3992,15 @@ Returns whether the call is completed.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">retryIf = function (retryPredicate) {
-    precond.checkState(this.isPending(), &#x27;FunctionCall in progress.&#x27;);
+    precond.checkState(this.isPending(), 'FunctionCall in progress.');
     this.retryPredicate_ = retryPredicate;
     return this;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
     if (err) {
-        console.log(&#x27;Error: &#x27; + err.message);
+        console.log('Error: ' + err.message);
     } else {
-        console.log(&#x27;Status: &#x27; + res.statusCode);
+        console.log('Status: ' + res.statusCode);
     }
 });
 
@@ -4036,14 +4029,14 @@ call.start();
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">setStrategy = function (strategy) {
-    precond.checkState(this.isPending(), &#x27;FunctionCall in progress.&#x27;);
+    precond.checkState(this.isPending(), 'FunctionCall in progress.');
     this.strategy_ = strategy;
     return this; // Return this for chaining.
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-        console.log(&#x27;Error: &#x27; + err.message);
+        console.log('Error: ' + err.message);
     } else {
-        console.log(&#x27;Status: &#x27; + res.statusCode);
+        console.log('Status: ' + res.statusCode);
     }
 });
 
@@ -4074,8 +4067,8 @@ call.start();
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">start = function (backoffFactory) {
-    precond.checkState(!this.isAborted(), &#x27;FunctionCall is aborted.&#x27;);
-    precond.checkState(this.isPending(), &#x27;FunctionCall already started.&#x27;);
+    precond.checkState(!this.isAborted(), 'FunctionCall is aborted.');
+    precond.checkState(this.isPending(), 'FunctionCall already started.');
 
     var strategy = this.strategy_ || new FibonacciBackoffStrategy();
 
@@ -4083,11 +4076,11 @@ call.start();
         backoffFactory(strategy) :
         new Backoff(strategy);
 
-    this.backoff_.on(&#x27;ready&#x27;, this.doCall_.bind(this, true /* isRetry */));
-    this.backoff_.on(&#x27;fail&#x27;, this.doCallback_.bind(this));
-    this.backoff_.on(&#x27;backoff&#x27;, this.handleBackoff_.bind(this));
+    this.backoff_.on('ready', this.doCall_.bind(this, true /* isRetry */));
+    this.backoff_.on('fail', this.doCallback_.bind(this));
+    this.backoff_.on('backoff', this.handleBackoff_.bind(this));
 
-    if (this.failAfter_ &#x3e; 0) {
+    if (this.failAfter_ &gt; 0) {
         this.backoff_.failAfter(this.failAfter_);
     }
 
@@ -4095,7 +4088,7 @@ call.start();
     this.doCall_(false /* isRetry */);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-        console.log(&#x27;Status: &#x27; + res.statusCode);
+        console.log('Status: ' + res.statusCode);
     }
 });
 
@@ -4131,18 +4124,18 @@ Constructs a Fibonacci backoff (10, 10, 20, 30, 50, etc.).
     <li>example usage<pre class="apidocCodePre">...
 
 Note that `Backoff` objects are meant to be instantiated once and reused
-several times by calling `reset` after a successful &#x22;retry&#x22;.
+several times by calling `reset` after a successful "retry".
 
 ### Functional
 
-It&#x27;s also possible to avoid some boilerplate code when invoking an asynchronous
+It's also possible to avoid some boilerplate code when invoking an asynchronous
 function in a backoff loop by using `backoff.<span class="apidocCodeKeywordSpan">call</span>(fn, [args, ...], callback)`.
 
 Typical usage looks like the following.
 
 ``` js
-var call = backoff.call(get, &#x27;https://duplika.ca/&#x27;, function(err, res) {
-console.log(&#x27;Num retries: &#x27; + call.getNumRetries());
+var call = backoff.call(get, 'https://duplika.ca/', function(err, res) {
+console.log('Num retries: ' + call.getNumRetries());
 ...</pre></li>
     </ul>
 
@@ -4164,18 +4157,18 @@ console.log(&#x27;Num retries: &#x27; + call.getNumRetries());
     <li>example usage<pre class="apidocCodePre">...
 
 Note that `Backoff` objects are meant to be instantiated once and reused
-several times by calling `reset` after a successful &#x22;retry&#x22;.
+several times by calling `reset` after a successful "retry".
 
 ### Functional
 
-It&#x27;s also possible to avoid some boilerplate code when invoking an asynchronous
+It's also possible to avoid some boilerplate code when invoking an asynchronous
 function in a backoff loop by using `backoff.<span class="apidocCodeKeywordSpan">call</span>(fn, [args, ...], callback)`.
 
 Typical usage looks like the following.
 
 ``` js
-var call = backoff.call(get, &#x27;https://duplika.ca/&#x27;, function(err, res) {
-console.log(&#x27;Num retries: &#x27; + call.getNumRetries());
+var call = backoff.call(get, 'https://duplika.ca/', function(err, res) {
+console.log('Num retries: ' + call.getNumRetries());
 ...</pre></li>
     </ul>
 
@@ -4260,3 +4253,4 @@ delay.
     ]
 </div>
 </div>
+</body></html>
