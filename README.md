@@ -1,6 +1,6 @@
 # npmdoc-backoff
 
-#### api documentation for  [backoff (v2.5.0)](https://github.com/MathieuTurcotte/node-backoff#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-backoff.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-backoff) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-backoff.svg)](https://travis-ci.org/npmdoc/node-npmdoc-backoff)
+#### basic api documentation for  [backoff (v2.5.0)](https://github.com/MathieuTurcotte/node-backoff#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-backoff.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-backoff) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-backoff.svg)](https://travis-ci.org/npmdoc/node-npmdoc-backoff)
 
 #### Fibonacci and exponential backoffs.
 
@@ -73,7 +73,8 @@
         "pretest": "jshint lib/ tests/ examples/ index.js",
         "test": "node_modules/nodeunit/bin/nodeunit tests/"
     },
-    "version": "2.5.0"
+    "version": "2.5.0",
+    "bin": {}
 }
 ```
 
